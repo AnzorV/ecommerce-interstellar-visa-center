@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: {
@@ -8,7 +10,6 @@ export const metadata: Metadata = {
     template: "%s - Interstellar Visa Center",
   },
   description: "Interstellar Visa Center, Apply for Space Visa",
-
 };
 
 export default function RootLayout({
@@ -17,10 +18,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <ClerkProvider>
+          <html lang="en">
       <body className="font-poppins antialiased">
         <Header />
-        {children}</body>
+        {children}
+        <Footer />
+      </body>
     </html>
+    </ClerkProvider>
   );
 }
