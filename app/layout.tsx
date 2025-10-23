@@ -1,31 +1,13 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { ClerkProvider } from "@clerk/nextjs";
-
-export const metadata: Metadata = {
-  title: {
-    default: "Interstellar Visa Center",
-    template: "%s - Interstellar Visa Center",
-  },
-  description: "Interstellar Visa Center, Apply for Space Visa",
-};
-
-export default function RootLayout({
+const RootLayout=({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  return (
-    <ClerkProvider>
-          <html lang="en">
-      <body className="font-poppins antialiased">
-        <Header />
-        {children}
-        <Footer />
-      </body>
+})=>{
+    return <html lang="en"> 
+        <body  className="font-poppins antialiased">
+            {children}
+        </body>
     </html>
-    </ClerkProvider>
-  );
 }
+
+export default RootLayout

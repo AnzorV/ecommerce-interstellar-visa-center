@@ -37,21 +37,39 @@ const socialLink = [
   },
 ];
 
-const SocialMedia = ({className, iconClassName, tooltipClassName} : Props) => {
+const SocialMedia = ({ className, iconClassName, tooltipClassName }: Props) => {
   return (
     <TooltipProvider>
       <div className={cn("flex items-center gap-3.5", className)}>
         {socialLink?.map((item) => (
           <Tooltip key={item?.title}>
             <TooltipTrigger asChild>
-              <Link target="_blank" rel="noopener noreferrer" href={item?.href} key={item?.title} className={cn("p-2 border rounded-full hover:text-white hover:border-astro-green hoverEffect")}>{item?.icon}</Link>
+              <Link
+                key={item?.title}
+                target="_blank"
+                rel="noopener noreferrer"
+                href={item?.href}
+                className={cn(
+                  "p-2 border rounded-full hover:text-white hover:border-astro-purple hoverEffect",
+                  iconClassName
+                )}
+              >
+                {item?.icon}
+              </Link>
             </TooltipTrigger>
-            <TooltipContent className={cn("bg-white text-space-dark font-semibold",tooltipClassName)}>{item?.title}</TooltipContent>
+            <TooltipContent
+              className={cn(
+                "bg-black text-white px-3 py-1 rounded-lg shadow-lg text-sm font-medium " +
+                  "animate-in fade-in zoom-in-95 duration-200",
+                tooltipClassName
+              )}
+            >
+              {item?.title}
+            </TooltipContent>
           </Tooltip>
         ))}
       </div>
     </TooltipProvider>
   );
 };
-
 export default SocialMedia;
