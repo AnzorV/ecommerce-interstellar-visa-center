@@ -17,7 +17,7 @@ const HomeCategories = ({ categories }: { categories: Category[] }) => {
           >
             {category?.image && (
               <div className="overflow-hidden border border-astro-orange/30 hover:border-astro-orange hoverEffect w-20 h-20 p-1">
-                <Link href={`/category/${category?.slug?.current}`}>
+                 <Link href={`/category/${category?.slug?.current}`}>
                   <Image
                     src={urlFor(category?.image).url()}
                     alt="categoryImage"
