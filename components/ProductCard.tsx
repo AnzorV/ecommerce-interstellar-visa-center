@@ -4,7 +4,7 @@ import { Flame, StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import AddToWishlistButton from "./AddToWishlistButton";
+import ProductSideMenu from "./ProductSideMenu";
 import { Title } from "./ui/text";
 import PriceView from "./PriceView";
 import AddToCartButton from "./AddToCartButton";
@@ -27,7 +27,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           />
           </Link>
         )}
-        <AddToWishlistButton product={product} />
+        <ProductSideMenu product={product} />
         {product?.status === "sale" ? (
           <p className="absolute top-2 left-2 z-10 text-xs border border-black px-2 rounded-full group-hover:border-green-300 hover:text-astro-green hoverEffect">
             Sale!
