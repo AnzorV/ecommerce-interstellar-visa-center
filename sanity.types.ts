@@ -13,6 +13,21 @@
  */
 
 // Source: schema.json
+export type Address = {
+  _id: string;
+  _type: "address";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  email?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  default?: boolean;
+  createdAt?: string;
+};
 export type Blogcategory = {
   _id: string;
   _type: "blogcategory";
