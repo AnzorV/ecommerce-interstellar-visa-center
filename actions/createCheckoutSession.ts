@@ -1,9 +1,8 @@
 "use server";
 
 import stripe from "@/lib/stripe";
-import { Address } from "@/sanity.types";
-import { urlFor } from "@/sanity/lib/image";
 import { CartItem } from "@/store";
+import { urlFor } from "@/sanity/lib/image";
 import Stripe from "stripe";
 
 export interface Metadata {
@@ -11,7 +10,6 @@ export interface Metadata {
   customerName: string;
   customerEmail: string;
   clerkUserId?: string;
-  address?: Address | null;
 }
 
 export interface GroupedCartItems {
@@ -37,7 +35,6 @@ export async function createCheckoutSession(
         customerName: metadata.customerName,
         customerEmail: metadata.customerEmail,
         clerkUserId: metadata.clerkUserId!,
-        address: JSON.stringify(metadata.address),
       },
       mode: "payment",
       allow_promotion_codes: true,
@@ -66,6 +63,7 @@ export async function createCheckoutSession(
         quantity: item?.quantity,
       })),
     };
+
     if (customerId) {
       sessionPayload.customer = customerId;
     } else {

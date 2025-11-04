@@ -224,6 +224,7 @@ const CartPage = () => {
                         />
                       </div>
                       <Button
+                        onClick={handleCheckout}
                         className="w-full rounded-full font-semibold tracking-wide hoverEffect"
                         size="lg"
                         disabled={loading}

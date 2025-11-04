@@ -115,18 +115,6 @@ export const orderType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "address",
-      title: "Shipping Address",
-      type: "object",
-      fields: [
-        defineField({ name: "state", title: "State", type: "string" }),
-        defineField({ name: "zip", title: "Zip Code", type: "string" }),
-        defineField({ name: "city", title: "City", type: "string" }),
-        defineField({ name: "address", title: "Address", type: "string" }),
-        defineField({ name: "name", title: "Name", type: "string" }),
-      ],
-    }),
-    defineField({
       name: "status",
       title: "Order Status",
       type: "string",

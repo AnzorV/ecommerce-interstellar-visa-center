@@ -10,6 +10,8 @@ import MobileMenu from "./MobileMenu";
 
 import { ClerkLoaded, SignedIn, UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
+import Link from "next/link";
+import { Logs } from "lucide-react";
 
 const Header = async()  => {
   const user = await currentUser();
@@ -29,6 +31,9 @@ const Header = async()  => {
           <FavouriteButton />
           <ClerkLoaded>
             <SignedIn>
+              <Link href={"/orders"}>
+              <Logs />
+              </Link>
               <UserButton/>
             </SignedIn>
           {!user && <SignIn />}
