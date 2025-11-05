@@ -1224,6 +1224,23 @@
         },
         "optional": true
       },
+      "stockType": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "unlimited"
+            },
+            {
+              "type": "string",
+              "value": "limited"
+            }
+          ]
+        },
+        "optional": true
+      },
       "stock": {
         "type": "objectAttribute",
         "value": {

@@ -1,4 +1,5 @@
 "use client";
+
 import { Product } from "@/sanity.types";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
@@ -16,18 +17,30 @@ interface Props {
 const AddToCartButton = ({ product, className }: Props) => {
   const { addItem, getItemCount } = useStore();
   const itemCount = getItemCount(product?._id);
-  const isOutOfStock = product?.stock === 0;
+
+  // --- NEW LOGIC ---
+  const isUnlimited = product?.stockType === "unlimited";
+  const stockAmount = product?.stock ?? 0;
+  const isOutOfStock = !isUnlimited && stockAmount <= 0;
+  // ------------------
 
   const handleAddToCart = () => {
-    if ((product?.stock as number) > itemCount) {
+    // If unlimited, skip stock check
+    if (isUnlimited) {
       addItem(product);
-      toast.success(
-        `${product?.name?.substring(0, 12)}... added successfully!`
-      );
+      toast.success(`${product?.name?.substring(0, 12)}... added successfully!`);
+      return;
+    }
+
+    // Otherwise enforce stock limit
+    if (stockAmount > itemCount) {
+      addItem(product);
+      toast.success(`${product?.name?.substring(0, 12)}... added successfully!`);
     } else {
-      toast.error("Can not add more than available stock");
+      toast.error("Cannot add more than available stock");
     }
   };
+
   return (
     <div className="w-full h-12 flex items-center">
       {itemCount ? (
@@ -36,6 +49,7 @@ const AddToCartButton = ({ product, className }: Props) => {
             <span className="text-xs text-darkColor/80">Quantity</span>
             <QuantityButtons product={product} />
           </div>
+
           <div className="flex items-center justify-between border-t pt-1">
             <span className="text-xs font-semibold">Subtotal</span>
             <PriceFormatter
@@ -52,7 +66,12 @@ const AddToCartButton = ({ product, className }: Props) => {
             className
           )}
         >
-          <ShoppingBag /> {isOutOfStock ? "Out of Stock" : "Add to Cart"}
+          <ShoppingBag />
+          {isUnlimited
+            ? "Add to Cart"
+            : isOutOfStock
+            ? "Out of Stock"
+            : "Add to Cart"}
         </Button>
       )}
     </div>

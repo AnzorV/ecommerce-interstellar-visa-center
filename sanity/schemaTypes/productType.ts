@@ -53,11 +53,33 @@ export const productType = defineType({
       of: [{ type: "reference", to: { type: "category" } }],
     }),
     defineField({
-      name: "stock",
-      title: "Stock",
-      type: "number",
-      validation: (Rule) => Rule.min(0),
+  name: "stockType",
+  title: "Stock Type",
+  type: "string",
+  options: {
+    list: [
+      { title: "Unlimited", value: "unlimited" },
+      { title: "Limited", value: "limited" },
+    ],
+    layout: "radio", // optional, gives nice radio buttons
+  },
+  initialValue: "unlimited",
+}),
+
+defineField({
+  name: "stock",
+  title: "Stock Quantity",
+  type: "number",
+  hidden: ({ parent }) => parent?.stockType !== "limited",
+  validation: (Rule) =>
+    Rule.custom((stock, context) => {
+      if (context.parent?.stockType === "limited" && (stock === undefined || stock < 0)) {
+        return "Stock must be 0 or higher for limited items";
+      }
+      return true;
     }),
+}),
+
     defineField({
       name: "brand",
       title: "Brand",

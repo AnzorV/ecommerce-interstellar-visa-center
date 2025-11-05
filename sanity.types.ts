@@ -198,6 +198,7 @@ export type Product = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "category";
   }>;
+  stockType?: "unlimited" | "limited";
   stock?: number;
   brand?: {
     _ref: string;
@@ -527,6 +528,7 @@ export type DEAL_PRODUCTSResult = Array<{
   price?: number;
   discount?: number;
   categories: Array<string | null> | null;
+  stockType?: "limited" | "unlimited";
   stock?: number;
   brand?: {
     _ref: string;
@@ -571,6 +573,7 @@ export type PRODUCT_BY_SLUG_QUERYResult = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "category";
   }>;
+  stockType?: "limited" | "unlimited";
   stock?: number;
   brand?: {
     _ref: string;
@@ -639,6 +642,7 @@ export type MY_ORDERS_QUERYResult = Array<{
         _key: string;
         [internalGroqTypeReferenceTo]?: "category";
       }>;
+      stockType?: "limited" | "unlimited";
       stock?: number;
       brand?: {
         _ref: string;
